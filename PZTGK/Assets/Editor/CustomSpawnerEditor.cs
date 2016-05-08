@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class CustomSpawnerEditor : Editor {
 
 	Spawner spawner;
-	Wave wave;
 	SerializedObject GetTarget;
 	SerializedProperty aiList;
 	int aiListSize;
