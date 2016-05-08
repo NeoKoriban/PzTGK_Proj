@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyScript : MonoBehaviour 
 {
@@ -12,6 +13,7 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject[] lootType;
     public float[] lootPossibility;
+	public List<BaseAI> AIQueue;
 
     private bool isShuttingDown = false;
 
