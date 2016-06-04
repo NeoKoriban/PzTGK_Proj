@@ -13,27 +13,89 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject[] lootType;
     public float[] lootPossibility;
-	public List<BaseAI> AIQueue;
+	private List<BaseAI> AIQueue;
+	private bool destroyAfterLastAction;
+	private int currentAction;
+	private float currentActionTime;
+	private float timeSinceLastShot;
+	private bool killed = false;
+	private Vector2 differenceBetweenPoints;
 
     private bool isShuttingDown = false;
+
+	public void setAIQueue(List<BaseAI> list) {
+		this.AIQueue = list;
+	}
+
+	public void setDestroyAfteLastAction(bool destroy) {
+		this.destroyAfterLastAction = destroy;
+	}
+
+	public List<BaseAI> getAIQueue() {
+		return AIQueue;
+	}
+
+	public bool getDestroyAfterLastAction() {
+		return destroyAfterLastAction;
+	}
 
 	void Start () 
     {
         currentHealth = maxHealth;
+		currentActionTime = 0.0f;
+		timeSinceLastShot = 0.0f;
+		currentAction = 0;
+		differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - 
+			new Vector2(this.transform.position.x, this.transform.position.z);
 
         if (lootType.Length != lootPossibility.Length)
             lootPossibility = new float[lootPossibility.Length];
 	}
 	
 	void Update () 
-    {
-        if (currentHealth <= 0.0f)
-            Destroy(this.gameObject);
+	{
+		currentActionTime += Time.deltaTime;
+		timeSinceLastShot += Time.deltaTime;
+        if (currentHealth <= 0.0f) {
+			Destroy (this.gameObject);
+			killed = true;
+		}
+		switch (AIQueue [currentAction].typeOfMove) {
+			case 0: //idle
+			break;
+			case 1: //linear
+			Vector3 position = this.transform.position;
+			position.x += differenceBetweenPoints.x * Time.deltaTime / AIQueue [currentAction].lengthOfAction;
+			position.z += differenceBetweenPoints.y * Time.deltaTime / AIQueue [currentAction].lengthOfAction;
+			this.transform.position = position;
+			break;
+		}
+		if (AIQueue[currentAction].shootInterval > 0.0f && timeSinceLastShot >= AIQueue [currentAction].shootInterval) {
+			shoot (0); //TODO: zmieńcie to sobie na jakiś typ, bo się na tym nie znam
+			timeSinceLastShot = 0.0f;
+		}
+		if (currentActionTime >= AIQueue [currentAction].lengthOfAction) {
+			if (++currentAction == AIQueue.Count) {
+				if (destroyAfterLastAction) {
+					Destroy (this.gameObject);
+				} else {
+					currentAction = 0;
+					currentActionTime = 0.0f;
+					differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - 
+						new Vector2(this.transform.position.x, this.transform.position.z);
+				}
+			} else {
+				currentActionTime = 0.0f;
+				differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - 
+									new Vector2(this.transform.position.x, this.transform.position.z);
+			}
+		}
+
 	}
 
     void OnDestroy()
     {
-        if(!isShuttingDown)
+        if(!isShuttingDown && killed)
             dropLoot();
     }
 

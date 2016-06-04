@@ -30,6 +30,8 @@ public class CustomSpawnerEditor : Editor {
 		spawner.startOfWave = EditorGUILayout.FloatField ("Start of wave (in seconds): ", spawner.startOfWave);
 		spawner.numberOfEnemiesInWave = EditorGUILayout.IntField ("Number of enemies in wave: ", spawner.numberOfEnemiesInWave);
 		spawner.enemySpawnInterval = EditorGUILayout.FloatField ("Interval between consecutive enemies spawns: ", spawner.enemySpawnInterval);
+		spawner.enemyPrefab = (GameObject)EditorGUILayout.ObjectField ("Enemy prefab: ", spawner.enemyPrefab, typeof(GameObject));
+		spawner.destroyAfterLastAction = EditorGUILayout.Toggle ("Destroy after last action finished: ", spawner.destroyAfterLastAction);
 		aiListSize = aiList.arraySize;
 		EditorGUILayout.Space ();
 		EditorGUILayout.LabelField ("Define enemy AI: ", EditorStyles.boldLabel);
