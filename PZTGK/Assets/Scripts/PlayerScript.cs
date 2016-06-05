@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour
 	
 	void Update () 
     {
-        movement();
+        //movement();
 
         if(shield != null)
             shield.transform.position = transform.position;
