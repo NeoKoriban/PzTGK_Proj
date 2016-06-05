@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BaseAI.cs" />
      <Compile Include="Assets\Scripts\BlackHoleScript.cs" />
      <Compile Include="Assets\Scripts\BuildingScript.cs" />
      <Compile Include="Assets\Scripts\BulletScript.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\ObjectPickupScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
+     <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\WeaponPickup.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{36F87C27-6E1E-7AE2-7FB9-1A185168FF08}") = "PZTGK", "Assembly-CSharp.csproj", "{9770D9F4-D2FC-EC1D-89A3-2C77178371A5}"
 EndProject
+Project("{36F87C27-6E1E-7AE2-7FB9-1A185168FF08}") = "PZTGK", "Assembly-CSharp-Editor.csproj", "{E10119A1-F1C9-F83A-6512-A47F2A093D9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{9770D9F4-D2FC-EC1D-89A3-2C77178371A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9770D9F4-D2FC-EC1D-89A3-2C77178371A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9770D9F4-D2FC-EC1D-89A3-2C77178371A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E10119A1-F1C9-F83A-6512-A47F2A093D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E10119A1-F1C9-F83A-6512-A47F2A093D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E10119A1-F1C9-F83A-6512-A47F2A093D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E10119A1-F1C9-F83A-6512-A47F2A093D9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
