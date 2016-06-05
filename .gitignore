@@ -13,14 +13,14 @@ sysinfo.txt
 # ===================================== #
 [Ee]xported[Oo]bj/
 .vs/
-/*.userprefs
-/*.csproj
-/*.pidb
-/*.suo
-/*.sln*
-/*.user
-/*.unityproj
-/*.booproj
+PZTGK/*.userprefs
+PZTGK/*.csproj
+PZTGK/*.pidb
+PZTGK/*.suo
+PZTGK/*.sln*
+PZTGK/*.user
+PZTGK/*.unityproj
+PZTGK/*.booproj
  
 # ============ #
 # OS generated #
