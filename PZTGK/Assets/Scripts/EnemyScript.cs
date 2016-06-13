@@ -4,24 +4,24 @@ using System.Collections.Generic;
 
 public class EnemyScript : MonoBehaviour 
 {
-    public float points;
+	public float points;
 
-    public float maxHealth;
-    public float currentHealth;
+	public float maxHealth;
+	public float currentHealth;
 
-    public GameObject[] ammoType;
+	public GameObject[] ammoType;
 
-    public GameObject[] lootType;
-    public float[] lootPossibility;
+	public GameObject[] lootType;
+	public float[] lootPossibility;
 	private List<BaseAI> AIQueue;
-	private bool destroyAfterLastAction;
+	protected bool destroyAfterLastAction;
 	private int currentAction;
 	private float currentActionTime;
 	private float timeSinceLastShot;
 	private bool killed = false;
 	private Vector2 differenceBetweenPoints;
 
-    private bool isShuttingDown = false;
+	private bool isShuttingDown = false;
 
 	public void setAIQueue(List<BaseAI> list) {
 		this.AIQueue = list;
@@ -39,27 +39,29 @@ public class EnemyScript : MonoBehaviour
 		return destroyAfterLastAction;
 	}
 
-	void Start () 
-    {
-        currentHealth = maxHealth;
+	protected void Start ()
+	{
+		currentHealth = maxHealth;
 		currentActionTime = 0.0f;
 		timeSinceLastShot = 0.0f;
 		currentAction = 0;
-		differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - 
-			new Vector2(this.transform.position.x, this.transform.position.z);
 
-        if (lootType.Length != lootPossibility.Length)
-            lootPossibility = new float[lootPossibility.Length];
+		if (lootType.Length != lootPossibility.Length)
+			lootPossibility = new float[lootPossibility.Length];
 	}
-	
-	void Update () 
+
+	protected void Update ()
 	{
 		currentActionTime += Time.deltaTime;
+		Debug.Log (currentAction + " - " + currentActionTime);
 		timeSinceLastShot += Time.deltaTime;
-        if (currentHealth <= 0.0f) {
+		if (currentHealth <= 0.0f) {
 			Destroy (this.gameObject);
 			killed = true;
 		}
+
+		if (AIQueue == null || AIQueue.Count == 0 || currentAction > AIQueue.Count - 1) { return; }
+
 		switch (AIQueue [currentAction].typeOfMove) {
 			case 0: //idle
 			break;
@@ -81,52 +83,55 @@ public class EnemyScript : MonoBehaviour
 				} else {
 					currentAction = 0;
 					currentActionTime = 0.0f;
-					differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - 
-						new Vector2(this.transform.position.x, this.transform.position.z);
+					UpdateDifference ();
 				}
 			} else {
 				currentActionTime = 0.0f;
-				differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - 
-									new Vector2(this.transform.position.x, this.transform.position.z);
+				UpdateDifference ();
 			}
 		}
-
 	}
 
-    void OnDestroy()
-    {
-        if(!isShuttingDown && killed)
-            dropLoot();
-    }
+	protected void UpdateDifference()
+	{
+		if (AIQueue == null || AIQueue.Count == 0 || currentAction > AIQueue.Count - 1) { return; }
 
-    void OnApplicationQuit()
-    {
-        isShuttingDown = true;
-    }
+		Vector3 pos = this.transform.position;
+		differenceBetweenPoints = AIQueue[currentAction].finalPointCoords - new Vector2(pos.x, pos.z);
+	}
 
-    private void dropLoot()
-    {
-        for (int i = 0; i < lootType.Length; ++i)
-        {
-            if (Random.Range(0.0f, 1.0f) <= lootPossibility[i])
-            {
-                GameObject loot = lootType[i];
-                loot.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                Instantiate(loot);
-                break;
-            }
-        }
-    }
+	void OnDestroy()
+	{
+		if(!isShuttingDown && killed)
+			dropLoot();
+	}
 
-    private void shoot(int number)
-    {
-        if (ammoType.Length < number)
-            return;
+	void OnApplicationQuit()
+	{
+		isShuttingDown = true;
+	}
 
-        GameObject bullet = ammoType[number];
-        bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        Instantiate(bullet);
-    }
+	private void dropLoot()
+	{
+		for (int i = 0; i < lootType.Length; ++i)
+		{
+			if (Random.Range(0.0f, 1.0f) <= lootPossibility[i])
+			{
+				GameObject loot = lootType[i];
+				loot.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+				Instantiate(loot);
+				break;
+			}
+		}
+	}
 
-    
+	private void shoot(int number)
+	{
+		if (ammoType.Length < number)
+			return;
+
+		GameObject bullet = ammoType[number];
+		bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+		Instantiate(bullet);
+	}
 }

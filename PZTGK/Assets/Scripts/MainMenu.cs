@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 	public int option;
@@ -18,7 +19,8 @@ public class MainMenu : MonoBehaviour {
 		switch(option)
 		{
 		case 0:
-			Application.LoadLevel(1);
+			//Application.LoadLevel (1);
+			SceneManager.LoadScene ("map1");
 			break;
 		case 3:
 			Application.Quit ();

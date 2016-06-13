@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour
 	
 	void Update () 
     {
-        //movement();
+        movement();
 
         if(shield != null)
             shield.transform.position = transform.position;
@@ -212,5 +212,5 @@ public class PlayerScript : MonoBehaviour
 
         if (moveSpeed.z > maxMoveSpeed.z)
             moveSpeed.z = maxMoveSpeed.z;
-    }
+	}
 }
