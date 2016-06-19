@@ -7,21 +7,21 @@
 [Ll]ibrary/
 sysinfo.txt
 *.stackdump
- 
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 [Ee]xported[Oo]bj/
 .vs/
-PZTGK/*.userprefs
-PZTGK/*.csproj
-PZTGK/*.pidb
-PZTGK/*.suo
-PZTGK/*.sln*
-PZTGK/*.user
-PZTGK/*.unityproj
-PZTGK/*.booproj
- 
+PZTGK*/*.userprefs
+PZTGK*/*.csproj
+PZTGK*/*.pidb
+PZTGK*/*.suo
+PZTGK*/*.sln*
+PZTGK*/*.user
+PZTGK*/*.unityproj
+PZTGK*/*.booproj
+
 # ============ #
 # OS generated #
 # ============ #
